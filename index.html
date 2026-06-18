@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gim Edukasi: Sel Elektrolisis - Fase F</title>
+    <title>MODULAR: Membuat Konten Digital Untuk Pembelajaran</title>
     <style>
         :root {
             --primary: #1e3a8a;
@@ -58,7 +58,7 @@
             text-align: center;
         }
 
-        /* --- TEMPLATE MAP SYSTEM (Sesuai Struktur MPI Modular) --- */
+        /* --- TEMPLATE MAP SYSTEM (Sesuai Alur Peta Linier) --- */
         .map-bg {
             display: flex;
             flex-direction: column;
@@ -224,7 +224,7 @@
             transform: scale(0.95);
         }
 
-        /* --- QUESTION SET (MULTIPLE CHOICE) STYLE --- */
+        /* --- QUESTION SET STYLE --- */
         .options-container {
             display: flex;
             flex-direction: column;
@@ -263,7 +263,7 @@
             cursor: pointer;
             align-self: center;
             margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(37,  99, 235, 0.3);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
             transition: all 0.2s;
         }
 
@@ -295,8 +295,8 @@
 
     <div id="screen-map" class="screen active map-bg">
         <div>
-            <h1 style="font-size: 2.5rem; letter-spacing: 2px; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">MISI PETA ELEKTROLISIS</h1>
-            <p style="text-align:center; color:#94a3b8; font-size: 1.1rem;">Selesaikan setiap stage secara berurutan untuk membuka gerbang energi kimia!</p>
+            <h1 style="font-size: 2.3rem; letter-spacing: 2px; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">KREASI GIM EDUKASI: SEL ELEKTROLISIS</h1>
+            <p style="text-align:center; color:#94a3b8; font-size: 1.1rem;">Selesaikan setiap misi untuk menguasai konsep perubahan energi listrik menjadi kimia!</p>
         </div>
         
         <div class="path-container">
@@ -309,17 +309,17 @@
             
             <div class="stage-node locked" id="node-2" onclick="startStage(2)">
                 2
-                <div class="node-label">02. Drag Teks Konsep</div>
+                <div class="node-label">02. Drag Teks Redoks</div>
             </div>
             
             <div class="stage-node locked" id="node-3" onclick="startStage(3)">
                 3
-                <div class="node-label">03. Evaluasi Hukum</div>
+                <div class="node-label">03. Kuis Analisis</div>
             </div>
 
             <div class="stage-node locked" id="node-4" onclick="startStage(4)" style="border-radius: 8px; font-size: 1rem;">
                 🏁
-                <div class="node-label">Selesai</div>
+                <div class="node-label">Finish</div>
             </div>
         </div>
 
@@ -327,24 +327,24 @@
     </div>
 
     <div id="screen-stage-1" class="screen">
-        <h2>Stage 1: Prinsip Kerja Sel Elektrolisis</h2>
+        <h2>Stage 1: Komponen & Prinsip Kerja Sel Elektrolisis</h2>
         <div class="materi-box">
-            <p style="font-size: 1.15rem;"><strong>Sel Elektrolisis</strong> merupakan jenis sel elektrokimia yang memanfaatkan energi listrik dari luar untuk mendorong terjadinya reaksi redoks yang <strong>tidak spontan</strong>. Berbeda dengan Sel Volta, elektroda dalam sel elektrolisis ditentukan oleh kutub arus listrik (DC) eksternal.</p>
+            <p style="font-size: 1.15rem;"><strong>Sel Elektrolisis</strong> adalah sel elektrokimia yang mengubah energi listrik menjadi energi kimia. Arus listrik searah (DC) dialirkan ke dalam larutan atau lelehan elektrolit untuk memicu reaksi redoks yang <strong>tidak spontan</strong>.</p>
             
-            <h3 style="color: #60a5fa; margin-top: 20px;">Komponen Utama & Aturan Kutub:</h3>
+            <h3 style="color: #60a5fa; margin-top: 20px;">Aturan Elektroda & Kutub (Konsep KNAP):</h3>
             <table style="width: 100%; border-collapse: collapse; margin: 15px 0; background: rgba(15, 23, 42, 0.4);">
                 <thead>
                     <tr style="border-bottom: 2px solid #334155; text-align: left;">
                         <th style="padding: 12px; color: #93c5fd;">Elektroda</th>
-                        <th style="padding: 12px; color: #93c5fd;">Muatan/Kutub</th>
-                        <th style="padding: 12px; color: #93c5fd;">Jenis Reaksi Kimia</th>
+                        <th style="padding: 12px; color: #93c5fd;">Muatan Kutub</th>
+                        <th style="padding: 12px; color: #93c5fd;">Reaksi Kimia</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr style="border-bottom: 1px solid #334155;">
                         <td style="padding: 12px; font-weight: bold;">Katoda</td>
                         <td style="padding: 12px; color: #f87171;">Negatif (-)</td>
-                        <td style="padding: 12px;"><strong>Reduksi</strong> (Penarikan Elektron)</td>
+                        <td style="padding: 12px;"><strong>Reduksi</strong> (Penangkapan Elektron)</td>
                     </tr>
                     <tr>
                         <td style="padding: 12px; font-weight: bold;">Anoda</td>
@@ -355,4 +355,220 @@
             </table>
             
             <p style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; padding: 12px; border-radius: 4px;">
-                💡 <strong>Jembatan Keledai Memori LUMI:</strong> Ingat hukum
+                💡 <strong>Tips Memori Visual LUMI:</strong> Ingat hukum singkatan <strong>"KNAP"</strong> (Katoda Negatif, Anoda Positif) serta rumus fungsi <strong>"KRED"</strong> (Katoda Reduksi) dan <strong>"ANOKS"</strong> (Anoda Oksidasi).
+            </p>
+        </div>
+        <button class="btn" onclick="completeStage(1)">Selesai Misi & Lanjut Ke Map</button>
+    </div>
+
+    <div id="screen-stage-2" class="screen">
+        <h2>Stage 2: Tantangan Rumpang Aliran Elektron</h2>
+        <div class="drag-instructions">Seret kata-kata di bawah ini ke tempat yang tepat untuk melengkapi alur proses redoks!</div>
+        
+        <div class="sentence-container">
+            1. Pada sel elektrolisis, kation (ion positif) di dalam larutan akan bergerak menuju kutub <div class="drop-zone" id="zone-katoda" ondrop="drop(event)" ondragover="allowDrop(event)"></div> untuk menangkap elektron.<br>
+            2. Spesi kimia yang melepaskan elektron akan mengalami reaksi oksidasi di permukaan <div class="drop-zone" id="zone-anoda" ondrop="drop(event)" ondragover="allowDrop(event)"></div>.<br>
+            3. Karena membutuhkan suplai arus listrik DC luar agar reaksi berjalan, reaksi ini bersifat <div class="drop-zone" id="zone-tidakspontan" ondrop="drop(event)" ondragover="allowDrop(event)"></div>.
+        </div>
+
+        <div class="words-bank">
+            <div class="drag-word" draggable="true" ondragstart="drag(event)" id="word-tidakspontan">Tidak Spontan</div>
+            <div class="drag-word" draggable="true" ondragstart="drag(event)" id="word-katoda">Katoda</div>
+            <div class="drag-word" draggable="true" ondragstart="drag(event)" id="word-anoda">Anoda</div>
+            <div class="drag-word" draggable="true" ondragstart="drag(event)" id="word-spontan">Spontan</div>
+        </div>
+
+        <button class="btn" onclick="checkDragTheWords()">Periksa Hasil Misi 2</button>
+        <div id="drag-feedback" class="feedback-box"></div>
+    </div>
+
+    <div id="screen-stage-3" class="screen">
+        <h2>Stage 3: Kuis Kompetensi Reaksi Elektroda</h2>
+        <div class="materi-box" style="background:none; padding:0; border:none; box-shadow:none;">
+            <p id="quiz-question" style="font-size:1.25rem; font-weight:500; line-height: 1.6;">Memuat pertanyaan analisis...</p>
+            <div class="options-container" id="quiz-options">
+                </div>
+        </div>
+        <div id="quiz-feedback" class="feedback-box"></div>
+    </div>
+
+    <div id="screen-stage-4" class="screen" style="justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 3rem; color: #10b981;">🎉 SELAMAT JAWABAN ANDA BENAR!! 🎉</h1>
+        <div class="materi-box" style="max-width: 600px; flex-grow: 0; margin: 20px 0;">
+            <p style="font-size: 1.2rem;">Anda telah menyelesaikan seluruh rangkaian peta materi **Sel Elektrolisis Kelas 12 Fase F**.</p>
+            <p style="color: #94a3b8;">Sekarang Anda siap melakukan analisis reaksi penyepuhan logam maupun elektrolisis industri dengan akurat.</p>
+        </div>
+        <button class="btn" onclick="resetGame()" style="background: #475569;">Ulangi Permainan</button>
+    </div>
+
+</div>
+
+<script>
+    // State Tracker
+    let clearedStages = [false, false, false, false];
+    let draggedWordsData = { "zone-katoda": "", "zone-anoda": "", "zone-tidakspontan": "" };
+
+    // Linear Map Navigation
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function startStage(stageNum) {
+        if (stageNum === 1 || clearedStages[stageNum - 2]) {
+            showScreen('screen-stage-' + stageNum);
+        }
+    }
+
+    function completeStage(stageNum) {
+        clearedStages[stageNum - 1] = true;
+        document.getElementById('node-' + stageNum).classList.add('cleared');
+        
+        if (stageNum < 4) {
+            document.getElementById('node-' + (stageNum + 1)).classList.remove('locked');
+        }
+        
+        if (clearedStages[0] && clearedStages[1] && clearedStages[2]) {
+            document.getElementById('node-4').classList.remove('locked');
+            document.getElementById('final-status').innerText = "Selamat, misi selesai! Klik bendera 🏁 untuk melihat pencapaian.";
+        }
+        
+        showScreen('screen-map');
+    }
+
+    // Drag and Drop Logic (Stage 2)
+    function allowDrop(ev) {
+        ev.preventDefault();
+        ev.target.classList.add('hovered');
+    }
+
+    document.querySelectorAll('.drop-zone').forEach(zone => {
+        zone.addEventListener('dragleave', (e) => e.target.classList.remove('hovered'));
+    });
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        ev.target.classList.remove('hovered');
+        let data = ev.dataTransfer.getData("text");
+        let draggedElement = document.getElementById(data);
+        
+        if (ev.target.classList.contains('drop-zone') && ev.target.children.length === 0) {
+            ev.target.appendChild(draggedElement);
+            draggedWordsData[ev.target.id] = data;
+        }
+    }
+
+    function checkDragTheWords() {
+        const targetAnswers = {
+            "zone-katoda": "word-katoda",
+            "zone-anoda": "word-anoda",
+            "zone-tidakspontan": "word-tidakspontan"
+        };
+
+        let isCorrect = true;
+        for (let zone in targetAnswers) {
+            if (draggedWordsData[zone] !== targetAnswers[zone]) {
+                isCorrect = false;
+            }
+        }
+
+        let feedback = document.getElementById('drag-feedback');
+        feedback.style.display = "block";
+
+        if (isCorrect) {
+            feedback.style.backgroundColor = "rgba(16, 185, 129, 0.2)";
+            feedback.style.color = "#10b981";
+            feedback.innerText = "Selamat anda benar!! Konsep muatan dan elektroda dipahami dengan baik.";
+            setTimeout(() => {
+                completeStage(2);
+                feedback.style.display = "none";
+            }, 1800);
+        } else {
+            feedback.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+            feedback.style.color = "#ef4444";
+            feedback.innerText = "Sayang sekali jawaban anda masih salah. Cek kembali aturan letak reaksi reduksi dan oksidasi.";
+            
+            // Kembalikan komponen ke words-bank jika salah
+            setTimeout(() => {
+                const bank = document.querySelector('.words-bank');
+                for (let zone in draggedWordsData) {
+                    let elementId = draggedWordsData[zone];
+                    if(elementId) bank.appendChild(document.getElementById(elementId));
+                    draggedWordsData[zone] = "";
+                }
+            }, 1800);
+        }
+    }
+
+    // Question Set Logic (Stage 3)
+    const quizQuestionData = {
+        question: "Pada proses elektrolisis larutan tembaga(II) sulfat (CuSO₄) dengan menggunakan elektroda karbon (inert), reaksi manakah yang terjadi pada permukaan Katoda?",
+        options: [
+            { text: "Cu²⁺(aq) + 2e⁻ → Cu(s)", correct: true },
+            { text: "2H₂O(l) + 2e⁻ → H₂(g) + 2OH⁻(aq)", correct: false },
+            { text: "2H₂O(l) → O₂(g) + 4H⁺(aq) + 4e⁻", correct: false },
+            { text: "Cu(s) → Cu²⁺(aq) + 2e⁻", correct: false }
+        ]
+    };
+
+    function initQuiz() {
+        document.getElementById('quiz-question').innerText = quizQuestionData.question;
+        const container = document.getElementById('quiz-options');
+        container.innerHTML = "";
+
+        quizQuestionData.options.forEach((opt, idx) => {
+            let btn = document.createElement('button');
+            btn.className = "option-btn";
+            btn.innerHTML = `<strong>${String.fromCharCode(65 + idx)}.</strong> ${opt.text}`;
+            btn.onclick = () => verifyQuizAnswer(opt.correct);
+            container.appendChild(btn);
+        });
+    }
+
+    function verifyQuizAnswer(isCorrect) {
+        let feedback = document.getElementById('quiz-feedback');
+        feedback.style.display = "block";
+
+        if (isCorrect) {
+            feedback.style.backgroundColor = "rgba(16, 185, 129, 0.2)";
+            feedback.style.color = "#10b981";
+            feedback.innerText = "Luar biasa, jawaban tepat! Ion Cu²⁺ memiliki potensial reduksi (E°) lebih besar dibanding air, sehingga mengendap sebagai logam Tembaga di katoda.";
+            setTimeout(() => {
+                completeStage(3);
+                feedback.style.display = "none";
+            }, 2500);
+        } else {
+            feedback.style.backgroundColor = "rgba(239, 68, 68, 0.2)";
+            feedback.style.color = "#ef4444";
+            feedback.innerText = "Jawaban kurang tepat. Petunjuk: Kation tembaga(II) bukan termasuk logam golongan utama (IA/IIA/Al/Mn), sehingga ia memenangkan persaingan reduksi.";
+        }
+    }
+
+    function resetGame() {
+        clearedStages = [false, false, false, false];
+        draggedWordsData = { "zone-katoda": "", "zone-anoda": "", "zone-tidakspontan": "" };
+        
+        document.querySelectorAll('.stage-node').forEach((node, i) => {
+            node.classList.remove('cleared');
+            if(i > 0) node.classList.add('locked');
+        });
+        
+        document.getElementById('final-status').innerText = "";
+        
+        const bank = document.querySelector('.words-bank');
+        document.querySelectorAll('.drag-word').forEach(word => bank.appendChild(word));
+        
+        initQuiz();
+        showScreen('screen-map');
+    }
+
+    // Inisialisasi awal kuis saat pertama dijalankan
+    initQuiz();
+</script>
+
+</body>
+</html>
