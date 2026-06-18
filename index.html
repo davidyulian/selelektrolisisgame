@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gim Edukasi: Sel Elektrolisis - Fase F</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #game-container {
+            width: 1024px;
+            height: 600px;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #4338ca;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2 {
+            color: #60a5fa;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        /* --- TEMPLATE MAP SYSTEM (Sesuai Struktur MPI Modular) --- */
+        .map-bg {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: radial-gradient(circle at center, #2e1065 0%, #0f172a 100%);
+        }
+
+        .path-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin-top: 80px;
+            position: relative;
+            padding: 0 50px;
+            box-sizing: border-box;
+        }
+
+        .path-line {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            width: 90%;
+            height: 4px;
+            border-top: 4px dotted #6366f1;
+            z-index: 1;
+            transform: translateY(-50%);
+        }
+
+        .stage-node {
+            width: 70px;
+            height: 70px;
+            background-color: #1e1b4b;
+            border: 4px solid #4338ca;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 2;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+            color: #ffffff;
+        }
+
+        .stage-node:hover:not(.locked) {
+            transform: scale(1.2) translateY(-5px);
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.8);
+            background-color: #4338ca;
+        }
+
+        .stage-node.cleared {
+            background-color: var(--success);
+            border-color: #059669;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .stage-node.locked {
+            background-color: #334155;
+            border-color: #475569;
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .node-label {
+            position: absolute;
+            bottom: -40px;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        /* --- CONTENT CARD DISPLAY (COURSE PRESENTATION) --- */
+        .materi-box {
+            background: rgba(30, 41, 59, 0.7);
+            border: 2px solid #334155;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-y: auto;
+            flex-grow: 1;
+            line-height: 1.7;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* --- DRAG THE WORDS STYLE --- */
+        .drag-instructions {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            color: #93c5fd;
+        }
+
+        .sentence-container {
+            font-size: 1.2rem;
+            line-height: 2.8;
+            margin-bottom: 30px;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+        }
+
+        .drop-zone {
+            display: inline-block;
+            width: 140px;
+            height: 34px;
+            background: #1e293b;
+            border: 2px dashed #475569;
+            border-radius: 6px;
+            vertical-align: middle;
+            margin: 0 8px;
+            position: relative;
+            text-align: center;
+            line-height: 32px;
+            transition: all 0.2s;
+        }
+
+        .drop-zone.hovered {
+            background: #334155;
+            border-color: #3b82f6;
+        }
+
+        .words-bank {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            background: rgba(30, 41, 59, 0.4);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .drag-word {
+            background: #3b82f6;
+            color: #ffffff;
+            padding: 6px 18px;
+            border-radius: 6px;
+            cursor: grab;
+            font-weight: 600;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+
+        .drag-word:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+
+        /* --- QUESTION SET (MULTIPLE CHOICE) STYLE --- */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 25px;
+        }
+
+        .option-btn {
+            background: #1e293b;
+            color: #e2e8f0;
+            border: 2px solid #334155;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-btn:hover {
+            background: #334155;
+            border-color: #4b5563;
+            transform: translateX(5px);
+        }
+
+        /* --- SHARED INTERACTIVE UI --- */
+        .btn {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            align-self: center;
+            margin-top: 20px;
+            box-shadow: 0 4px 12px rgba(37,  99, 235, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+        }
+
+        .feedback-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+
+    <div id="screen-map" class="screen active map-bg">
+        <div>
+            <h1 style="font-size: 2.5rem; letter-spacing: 2px; text-shadow: 0 4px 10px rgba(0,0,0,0.5);">MISI PETA ELEKTROLISIS</h1>
+            <p style="text-align:center; color:#94a3b8; font-size: 1.1rem;">Selesaikan setiap stage secara berurutan untuk membuka gerbang energi kimia!</p>
+        </div>
+        
+        <div class="path-container">
+            <div class="path-line"></div>
+            
+            <div class="stage-node" id="node-1" onclick="startStage(1)">
+                1
+                <div class="node-label">01. Konsep Dasar</div>
+            </div>
+            
+            <div class="stage-node locked" id="node-2" onclick="startStage(2)">
+                2
+                <div class="node-label">02. Drag Teks Konsep</div>
+            </div>
+            
+            <div class="stage-node locked" id="node-3" onclick="startStage(3)">
+                3
+                <div class="node-label">03. Evaluasi Hukum</div>
+            </div>
+
+            <div class="stage-node locked" id="node-4" onclick="startStage(4)" style="border-radius: 8px; font-size: 1rem;">
+                🏁
+                <div class="node-label">Selesai</div>
+            </div>
+        </div>
+
+        <div id="final-status" style="margin-top: 30px; font-weight: bold; color: #10b981; font-size: 1.2rem; min-height: 30px;"></div>
+    </div>
+
+    <div id="screen-stage-1" class="screen">
+        <h2>Stage 1: Prinsip Kerja Sel Elektrolisis</h2>
+        <div class="materi-box">
+            <p style="font-size: 1.15rem;"><strong>Sel Elektrolisis</strong> merupakan jenis sel elektrokimia yang memanfaatkan energi listrik dari luar untuk mendorong terjadinya reaksi redoks yang <strong>tidak spontan</strong>. Berbeda dengan Sel Volta, elektroda dalam sel elektrolisis ditentukan oleh kutub arus listrik (DC) eksternal.</p>
+            
+            <h3 style="color: #60a5fa; margin-top: 20px;">Komponen Utama & Aturan Kutub:</h3>
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0; background: rgba(15, 23, 42, 0.4);">
+                <thead>
+                    <tr style="border-bottom: 2px solid #334155; text-align: left;">
+                        <th style="padding: 12px; color: #93c5fd;">Elektroda</th>
+                        <th style="padding: 12px; color: #93c5fd;">Muatan/Kutub</th>
+                        <th style="padding: 12px; color: #93c5fd;">Jenis Reaksi Kimia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #334155;">
+                        <td style="padding: 12px; font-weight: bold;">Katoda</td>
+                        <td style="padding: 12px; color: #f87171;">Negatif (-)</td>
+                        <td style="padding: 12px;"><strong>Reduksi</strong> (Penarikan Elektron)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; font-weight: bold;">Anoda</td>
+                        <td style="padding: 12px; color: #60a5fa;">Positif (+)</td>
+                        <td style="padding: 12px;"><strong>Oksidasi</strong> (Pelepasan Elektron)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p style="background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; padding: 12px; border-radius: 4px;">
+                💡 <strong>Jembatan Keledai Memori LUMI:</strong> Ingat hukum
